@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthenticationManagement.API.Migrations
 {
     [DbContext(typeof(AuthenticationManagementContext))]
-    [Migration("20220630113344_newdb")]
-    partial class newdb
+    [Migration("20220704065931_database")]
+    partial class database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,13 +26,18 @@ namespace AuthenticationManagement.API.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Password")
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Hospitalname")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<string>("Location")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.ToTable("Admins");
                 });
@@ -58,18 +63,12 @@ namespace AuthenticationManagement.API.Migrations
                     b.Property<string>("DOB")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Education")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Experience")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
@@ -94,9 +93,6 @@ namespace AuthenticationManagement.API.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("Occupation")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
 
@@ -107,9 +103,6 @@ namespace AuthenticationManagement.API.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Specialization")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -142,16 +135,13 @@ namespace AuthenticationManagement.API.Migrations
                     b.Property<string>("AppUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Department")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Education")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Specialization")
+                    b.Property<string>("SpecificationinDepartment")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -159,32 +149,6 @@ namespace AuthenticationManagement.API.Migrations
                     b.HasIndex("AppUserId");
 
                     b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("AuthenticationManagement.API.Patient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Diagnosis")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Prescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Treatment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("Patients");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -318,14 +282,14 @@ namespace AuthenticationManagement.API.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("AuthenticationManagement.API.Doctor", b =>
+            modelBuilder.Entity("AuthenticationManagement.API.Admin", b =>
                 {
                     b.HasOne("AuthenticationManagement.API.AppUser", "AppUser")
                         .WithMany()
                         .HasForeignKey("AppUserId");
                 });
 
-            modelBuilder.Entity("AuthenticationManagement.API.Patient", b =>
+            modelBuilder.Entity("AuthenticationManagement.API.Doctor", b =>
                 {
                     b.HasOne("AuthenticationManagement.API.AppUser", "AppUser")
                         .WithMany()

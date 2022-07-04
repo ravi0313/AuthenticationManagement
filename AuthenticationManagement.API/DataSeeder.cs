@@ -37,13 +37,23 @@ namespace AuthenticationManagement.API
             var Admin = new AppUser
             {
                 Id = "101",
-                UserName = "Admin",
+                FirstName = "Navaneethan",
+                LastName = "s",
+                Gender = "Male",
+                Age = "23",
+                DOB = "05/06/1999",
+                Email = "navanethan@gmail.com",
+                PhoneNumber = "9677656488",
+                Address = "Hyderabad",
+                UserName = "navaneethan12",
             };
-            if (await userManager.FindByNameAsync("Admin") == null)
+            if (await userManager.FindByNameAsync("navaneethan12") == null)
             {
                 await userManager.CreateAsync(Admin, "Admin@1234");
                 await userManager.AddToRoleAsync(Admin, "Admin");
-                var doctordetails = new Doctor() { AppUser = Admin };
+                var admindetails = new Admin() { AppUser = Admin, Hospitalname = "CMS", Location = "Hyderabad" };
+                context.Admins.Add(admindetails);
+                await context.SaveChangesAsync();
             }
         }
         public async Task SeedUsers()
@@ -53,9 +63,10 @@ namespace AuthenticationManagement.API
                 FirstName = "Gal",
                 LastName = "Gadot",
                 Gender = "Female",
-                Occupation = "Doctor",
                 Age = "32",
                 DOB = "05/06/1990",
+                Email = "gal@gmail.com",
+                PhoneNumber = "9676656488",
                 Address = "Hyderabad",
                 UserName = "gal@outlook.com",
 
@@ -66,9 +77,10 @@ namespace AuthenticationManagement.API
                 FirstName = "Ravi",
                 LastName = "Teja",
                 Gender = "Male",
-                Occupation = "Student",
                 Age = "23",
                 DOB = "05/08/1999",
+                Email = "ravi@gmail.com",
+                PhoneNumber = "7396542335",
                 Address = "Hyderabad",
                 UserName = "ravi@outlook.com",
 
@@ -78,7 +90,7 @@ namespace AuthenticationManagement.API
             {
                 await userManager.CreateAsync(Doctor, "Gal@1234");
                 await userManager.AddToRoleAsync(Doctor, "Doctor");
-                var doctordetails = new Doctor() { AppUser = Doctor };
+                var doctordetails = new Doctor() { AppUser = Doctor, Education = "MBBS", Experience = "2", SpecificationinDepartment = "Orthology" };
                 context.Doctors.Add(doctordetails);
                 await context.SaveChangesAsync();
             }
@@ -87,8 +99,6 @@ namespace AuthenticationManagement.API
             {
                 await userManager.CreateAsync(Patient, "Ravi@1234");
                 await userManager.AddToRoleAsync(Patient, "Patient");
-                var patientdeetails = new Patient() { AppUser = Patient };
-                context.Patients.Add(patientdeetails);
                 await context.SaveChangesAsync();
             }
         }

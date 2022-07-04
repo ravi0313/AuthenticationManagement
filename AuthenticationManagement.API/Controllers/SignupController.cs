@@ -31,7 +31,6 @@ namespace AuthenticationManagement.API.Controllers
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Gender = dto.Gender,
-                Occupation = dto.Occupation,
                 Age = dto.Age,
                 DOB = dto.DOB,
                 UserName = dto.Username,

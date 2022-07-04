@@ -9,8 +9,7 @@ namespace AuthenticationManagement.API
     {
         public int Id { get; set; }
         public string Education { get; set; }
-        public string Specialization { get; set; }
-        public string Department { get; set; }
+        public string SpecificationinDepartment { get; set; }
         public string Experience { get; set; }
         public AppUser AppUser { get; set; }
     }

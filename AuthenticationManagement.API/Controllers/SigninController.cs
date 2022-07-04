@@ -68,15 +68,10 @@ namespace AuthenticationManagement.API.Controllers
             string jwt = handler.WriteToken(token);
 
             string userdetails = string.Empty;
-            if (role == "Patient")
-            {
-                var patientdetails = context.Patients.First(i => i.AppUser.Id == user.Id);
-                userdetails = patientdetails.Diagnosis;
-            }
-            else if (role == "Doctor")
+           if (role == "Doctor")
             {
                 var doctordetails = context.Doctors.First(i => i.AppUser.Id == user.Id);
-                userdetails = doctordetails.Department;
+                userdetails = doctordetails.SpecificationinDepartment;
             }
             string admindetails = string.Empty;
             var response = new
@@ -86,8 +81,7 @@ namespace AuthenticationManagement.API.Controllers
                 LastName = user.LastName,
                 Gender = user.Gender,
                 Age = user.Age,
-                Occupation = user.Occupation,
-                Email_id = user.Email,
+                Email = user.Email,
                 Phonenumber = user.PhoneNumber,
                 role = role,
                 token = jwt

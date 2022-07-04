@@ -3,23 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AuthenticationManagement.API.Migrations
 {
-    public partial class newdb : Migration
+    public partial class database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "Admins",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Username = table.Column<string>(nullable: true),
-                    Password = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Admins", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -56,10 +43,6 @@ namespace AuthenticationManagement.API.Migrations
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Gender = table.Column<string>(nullable: true),
-                    Occupation = table.Column<string>(nullable: true),
-                    Education = table.Column<string>(nullable: true),
-                    Specialization = table.Column<string>(nullable: true),
-                    Experience = table.Column<string>(nullable: true),
                     Age = table.Column<string>(nullable: true),
                     DOB = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true)
@@ -88,6 +71,26 @@ namespace AuthenticationManagement.API.Migrations
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Admins",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    Hospitalname = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    AppUserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Admins", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Admins_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,8 +185,7 @@ namespace AuthenticationManagement.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Education = table.Column<string>(nullable: true),
-                    Specialization = table.Column<string>(nullable: true),
-                    Department = table.Column<string>(nullable: true),
+                    SpecificationinDepartment = table.Column<string>(nullable: true),
                     Experience = table.Column<string>(nullable: true),
                     AppUserId = table.Column<string>(nullable: true)
                 },
@@ -198,27 +200,10 @@ namespace AuthenticationManagement.API.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "Patients",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Diagnosis = table.Column<string>(nullable: true),
-                    Treatment = table.Column<string>(nullable: true),
-                    Prescription = table.Column<string>(nullable: true),
-                    AppUserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Patients", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Patients_AspNetUsers_AppUserId",
-                        column: x => x.AppUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
+            migrationBuilder.CreateIndex(
+                name: "IX_Admins_AppUserId",
+                table: "Admins",
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -263,11 +248,6 @@ namespace AuthenticationManagement.API.Migrations
                 name: "IX_Doctors_AppUserId",
                 table: "Doctors",
                 column: "AppUserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Patients_AppUserId",
-                table: "Patients",
-                column: "AppUserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -292,9 +272,6 @@ namespace AuthenticationManagement.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Doctors");
-
-            migrationBuilder.DropTable(
-                name: "Patients");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

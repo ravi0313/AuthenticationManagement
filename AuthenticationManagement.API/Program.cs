@@ -22,7 +22,6 @@ namespace AuthenticationManagement.API
                 var seeder = container.GetRequiredService<DataSeeder>();
                 await seeder.SeedRoles();
                 await seeder.SeedUsers();
-                await seeder.SeedAdmin();
             }
 
             host.Run();

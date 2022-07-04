@@ -9,7 +9,6 @@ namespace AuthenticationManagement.API
 {
     public class AuthenticationManagementContext : IdentityDbContext<AppUser>
     {
-        public DbSet<Patient> Patients { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
         public DbSet<Admin> Admins { get; set; }
         public AuthenticationManagementContext(DbContextOptions options) : base(options)

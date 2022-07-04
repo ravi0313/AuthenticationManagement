@@ -5,7 +5,6 @@
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Gender { get; set; }
-        public string Occupation { get; set; }
         public string Phone_number { get; set; }
         public string Age { get; set; }
         public string DOB { get; set; }
