@@ -36,20 +36,23 @@ namespace AuthenticationManagement.API.Controllers
                 UserName = dto.Username,
                 Email = dto.Email_Id,
                 PhoneNumber = dto.Phone_number,
-                Address = dto.Address
+                Address = dto.Address,
             };
 
             IdentityResult result = await userManager.CreateAsync(user, dto.Password);
+
+
             if (result.Succeeded)
             {
-                bool IsRolePresent = await roleManager.RoleExistsAsync("Patients");
-                result = await userManager.AddToRoleAsync(user, "Patients");
+                bool IsRolePresent = await roleManager.RoleExistsAsync("Patient");
+                result = await userManager.AddToRoleAsync(user, "Patient");
                 if (result.Succeeded)
                 {
                     return StatusCode(201);
                 }
             }
             return BadRequest(result.Errors);
+
         }
 
     }

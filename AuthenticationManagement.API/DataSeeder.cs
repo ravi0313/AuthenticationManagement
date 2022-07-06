@@ -90,7 +90,7 @@ namespace AuthenticationManagement.API
             {
                 await userManager.CreateAsync(Doctor, "Gal@1234");
                 await userManager.AddToRoleAsync(Doctor, "Doctor");
-                var doctordetails = new Doctor() { AppUser = Doctor, Education = "MBBS", Experience = "2", SpecificationinDepartment = "Orthology" };
+                var doctordetails = new Doctor() { AppUser = Doctor, Education = "MBBS", Experience = "2", SpecializationinDepartment = "Orthology" };
                 context.Doctors.Add(doctordetails);
                 await context.SaveChangesAsync();
             }
@@ -102,5 +102,5 @@ namespace AuthenticationManagement.API
                 await context.SaveChangesAsync();
             }
         }
+        }
     }
-}
