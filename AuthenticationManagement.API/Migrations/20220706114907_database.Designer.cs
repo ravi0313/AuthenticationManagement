@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AuthenticationManagement.API.Migrations
 {
     [DbContext(typeof(AuthenticationManagementContext))]
-    [Migration("20220704065931_database")]
+    [Migration("20220706114907_database")]
     partial class database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -141,7 +141,7 @@ namespace AuthenticationManagement.API.Migrations
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpecificationinDepartment")
+                    b.Property<string>("SpecializationinDepartment")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

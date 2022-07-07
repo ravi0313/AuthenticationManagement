@@ -139,7 +139,7 @@ namespace AuthenticationManagement.API.Migrations
                     b.Property<string>("Experience")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("SpecificationinDepartment")
+                    b.Property<string>("SpecializationinDepartment")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

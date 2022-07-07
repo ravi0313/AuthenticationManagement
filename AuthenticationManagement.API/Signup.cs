@@ -8,6 +8,9 @@
         public string Phone_number { get; set; }
         public string Age { get; set; }
         public string DOB { get; set; }
+        public string Education { get; set; }
+        public string SpecializationinDepartment { get; set; }
+        public string Experience { get; set; }
         public string Address { get; set; }
         public string Email_Id { get; set; }
         public string Username { get; set; }

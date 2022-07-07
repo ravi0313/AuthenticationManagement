@@ -39,6 +39,25 @@ namespace AuthenticationManagement.API.Controllers
                 Address = dto.Address,
             };
 
+            if (dto.Role == "Doctor")
+            {
+                Doctor doctor = new Doctor
+                {
+                    Education = dto.Education,
+                    Experience = dto.Experience,
+                    SpecializationinDepartment = dto.SpecializationinDepartment,
+                    AppUser = user
+                };
+                IdentityResult doctorUser = await userManager.CreateAsync(user, dto.Password);
+                bool IsRolePresent = await roleManager.RoleExistsAsync("Doctor");
+                doctorUser = await userManager.AddToRoleAsync(user, "Doctor");
+                context.Doctors.Add(doctor);
+                await context.SaveChangesAsync();
+                if (doctorUser.Succeeded)
+                {
+                    return StatusCode(201);
+                }
+            }
             IdentityResult result = await userManager.CreateAsync(user, dto.Password);
 
 
@@ -52,6 +71,8 @@ namespace AuthenticationManagement.API.Controllers
                 }
             }
             return BadRequest(result.Errors);
+
+            
 
         }
 

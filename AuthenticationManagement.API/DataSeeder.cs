@@ -36,7 +36,6 @@ namespace AuthenticationManagement.API
         {
             var Admin = new AppUser
             {
-                Id = "101",
                 FirstName = "Navaneethan",
                 LastName = "s",
                 Gender = "Male",
@@ -45,30 +44,31 @@ namespace AuthenticationManagement.API
                 Email = "navanethan@gmail.com",
                 PhoneNumber = "9677656488",
                 Address = "Hyderabad",
-                UserName = "navaneethan12",
+                UserName = "Admin",
             };
-            if (await userManager.FindByNameAsync("navaneethan12") == null)
+            if (await userManager.FindByNameAsync("Admin") == null)
             {
                 await userManager.CreateAsync(Admin, "Admin@1234");
                 await userManager.AddToRoleAsync(Admin, "Admin");
-                var admindetails = new Admin() { AppUser = Admin, Hospitalname = "CMS", Location = "Hyderabad" };
+                var admindetails = new Admin() { AppUser = Admin, Hospitalname = "CMS", Location = "Hyderabad", Id=Admin.Id };
                 context.Admins.Add(admindetails);
                 await context.SaveChangesAsync();
             }
         }
         public async Task SeedUsers()
         {
+            
             var Doctor = new AppUser
             {
-                FirstName = "Gal",
-                LastName = "Gadot",
+                FirstName = "Nikita",
+                LastName = "Kokate",
                 Gender = "Female",
-                Age = "32",
-                DOB = "05/06/1990",
-                Email = "gal@gmail.com",
+                Age = "24",
+                DOB = "05/06/1998",
+                Email = "nikita@gmail.com",
                 PhoneNumber = "9676656488",
                 Address = "Hyderabad",
-                UserName = "gal@outlook.com",
+                UserName = "nikita@outlook.com",
 
             };
 
@@ -86,9 +86,9 @@ namespace AuthenticationManagement.API
 
             };
 
-            if (await userManager.FindByNameAsync("gal@outlook.com") == null)
+            if (await userManager.FindByNameAsync("nikita@outlook.com") == null)
             {
-                await userManager.CreateAsync(Doctor, "Gal@1234");
+                await userManager.CreateAsync(Doctor, "Nikita@1234");
                 await userManager.AddToRoleAsync(Doctor, "Doctor");
                 var doctordetails = new Doctor() { AppUser = Doctor, Education = "MBBS", Experience = "2", SpecializationinDepartment = "Orthology" };
                 context.Doctors.Add(doctordetails);

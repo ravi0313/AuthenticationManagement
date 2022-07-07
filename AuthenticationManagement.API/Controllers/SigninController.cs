@@ -67,13 +67,25 @@ namespace AuthenticationManagement.API.Controllers
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
             string jwt = handler.WriteToken(token);
 
-            string userdetails = string.Empty;
+            string doctorEducation = string.Empty;
+            string doctorExperience = string.Empty;
+            string doctorSpecializationInDepartment = string.Empty;
            if (role == "Doctor")
             {
                 var doctordetails = context.Doctors.First(i => i.AppUser.Id == user.Id);
-                userdetails = doctordetails.SpecificationinDepartment;
+                doctorEducation = doctordetails.Education;
+                doctorExperience = doctordetails.Experience;
+                doctorSpecializationInDepartment = doctordetails.SpecializationinDepartment;
             }
-            string admindetails = string.Empty;
+            string adminHospitalName = string.Empty;
+            string adminLocation = string.Empty;
+        
+            if (role == "Admin")
+            {
+                var admindts = context.Admins.First(i => i.AppUser.Id == user.Id);
+                adminHospitalName = admindts.Hospitalname;
+                adminLocation = admindts.Location;
+            }
             var response = new
             {
                 Id = user.Id,
@@ -84,6 +96,11 @@ namespace AuthenticationManagement.API.Controllers
                 Email = user.Email,
                 Phonenumber = user.PhoneNumber,
                 role = role,
+                Education = doctorEducation,
+                Experience = doctorExperience,
+                SpecializationInDepartment = doctorSpecializationInDepartment,
+                HospitalName = adminHospitalName,
+                Location = adminLocation,
                 token = jwt
             };
             return Ok(response);

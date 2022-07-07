@@ -185,7 +185,7 @@ namespace AuthenticationManagement.API.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Education = table.Column<string>(nullable: true),
-                    SpecificationinDepartment = table.Column<string>(nullable: true),
+                    SpecializationinDepartment = table.Column<string>(nullable: true),
                     Experience = table.Column<string>(nullable: true),
                     AppUserId = table.Column<string>(nullable: true)
                 },
