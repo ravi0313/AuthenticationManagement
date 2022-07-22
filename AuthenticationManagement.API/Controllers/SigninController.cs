@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AuthenticationManagement.API.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -105,6 +106,5 @@ namespace AuthenticationManagement.API.Controllers
             };
             return Ok(response);
         }
-
     }
 }

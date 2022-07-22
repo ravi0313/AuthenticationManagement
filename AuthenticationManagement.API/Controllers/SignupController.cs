@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AuthenticationManagement.API.DTOs;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +26,6 @@ namespace AuthenticationManagement.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Signup(Signup dto)
         {
-            //if(ModelState.IsValid) not required as [ApiController] takes care of it
             AppUser user = new AppUser
             {
                 FirstName = dto.FirstName,

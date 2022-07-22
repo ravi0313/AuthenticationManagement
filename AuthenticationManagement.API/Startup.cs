@@ -38,8 +38,8 @@ namespace AuthenticationManagement.API
             {
                 options.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "AMService API",
-                    Description = "Allows working with patients and doctors information in database",
+                    Title = "Authentication Management API",
+                    Description = "This API creates post method for SignIn and SignUp",
                     TermsOfService = new Uri("http://www.cognizant.com"),
                     Contact = new OpenApiContact()
                     {

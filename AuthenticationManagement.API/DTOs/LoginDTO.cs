@@ -1,4 +1,4 @@
-﻿namespace AuthenticationManagement.API
+﻿namespace AuthenticationManagement.API.DTOs
 {
     public class LoginDTO
     {
